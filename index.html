@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoSave Bot - Download Videos from Any Platform Instantly</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.js"></script>
+    <link href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a5f5f;
+            --secondary: #ff6b6b;
+            --accent: #4ecdc4;
+            --neutral: #2c3e50;
+            --bg: #fafafa;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            overflow-x: hidden;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(26, 95, 95, 0.05) 0%, rgba(255, 107, 107, 0.05) 100%);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse-glow {
+            from { box-shadow: 0 0 20px rgba(78, 205, 196, 0.3); }
+            to { box-shadow: 0 0 40px rgba(78, 205, 196, 0.6); }
+        }
+        
+        .demo-chat {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 1px solid rgba(26, 95, 95, 0.1);
+        }
+        
+        .platform-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .platform-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .stats-counter {
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(250, 250, 250, 0.9);
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 nav-blur border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-gradient-to-br from-teal-600 to-teal-700 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">📥</span>
+                    </div>
+                    <span class="font-bold text-xl text-gray-900">VideoSave Bot</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-teal-600 transition-colors">Home</a>
+                    <a href="features.html" class="text-gray-700 hover:text-teal-600 transition-colors">Features</a>
+                    <a href="setup.html" class="text-gray-700 hover:text-teal-600 transition-colors">Setup Guide</a>
+                    <a href="#stats" class="text-gray-700 hover:text-teal-600 transition-colors">Statistics</a>
+                </div>
+                <button class="bg-gradient-to-r from-teal-600 to-teal-700 text-white px-6 py-2 rounded-lg hover:from-teal-700 hover:to-teal-800 transition-all">
+                    Try Bot Now
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-20 pb-16 hero-bg min-h-screen flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <h1 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                        Download Videos from 
+                        <span class="gradient-text">Any Platform</span>
+                        Instantly
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                        No apps, no watermarks, no hassle. VideoSave Bot lets you download videos from TikTok, Instagram, YouTube, and more directly in Telegram.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                        <button class="bg-gradient-to-r from-teal-600 to-teal-700 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-teal-700 hover:to-teal-800 transition-all pulse-glow">
+                            🚀 Start Downloading Now
+                        </button>
+                        <button class="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl text-lg font-semibold hover:border-teal-600 hover:text-teal-600 transition-all">
+                            📱 View Demo
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-8 text-sm text-gray-500">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                            <span>50K+ Active Users</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                            <span>1M+ Videos Downloaded</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <div class="relative">
+                        <img src="resources/hero-bot.jpg" alt="VideoSave Bot Hero" class="w-full h-auto rounded-2xl shadow-2xl floating">
+                        <div class="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-red-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+                            <span class="text-sm">NEW</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bot Demo Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    See How Easy It Is
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Watch the bot in action. Simply send a link and get your video instantly.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <div class="demo-chat rounded-2xl p-6 shadow-xl">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center">
+                                    <span class="text-white font-bold">📥</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">VideoSave Bot</h3>
+                                    <p class="text-sm text-gray-500">Online</p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4 mb-6">
+                            <div class="flex justify-start">
+                                <div class="bg-gray-100 rounded-2xl px-4 py-2 max-w-xs">
+                                    <p class="text-sm">Send me any video link from TikTok, Instagram, or YouTube! 🎥</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-end">
+                                <div class="bg-teal-600 text-white rounded-2xl px-4 py-2 max-w-xs">
+                                    <p class="text-sm">https://tiktok.com/... 🎵</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-start">
+                                <div class="bg-gray-100 rounded-2xl px-4 py-2 max-w-xs">
+                                    <p class="text-sm flex items-center">
+                                        <span class="inline-block w-2 h-2 bg-teal-600 rounded-full mr-2 animate-pulse"></span>
+                                        ⏳ Processing video...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="demo-progress" class="w-full bg-gray-200 rounded-full h-2 mb-4">
+                            <div class="bg-gradient-to-r from-teal-500 to-teal-600 h-2 rounded-full transition-all duration-1000" style="width: 0%"></div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-sm text-gray-500">
+                            <span>Type a message...</span>
+                            <div class="flex space-x-2">
+                                <span>😊</span>
+                                <span>📎</span>
+                                <span>🎤</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">1</div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 mb-2">Copy Video Link</h3>
+                                <p class="text-gray-600">Find any video on TikTok, Instagram, YouTube, or other platforms and copy the share link.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">2</div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 mb-2">Send to Bot</h3>
+                                <p class="text-gray-600">Paste the link into your chat with VideoSave Bot. No commands needed - just send the link!</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">3</div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 mb-2">Get Your Video</h3>
+                                <p class="text-gray-600">The bot processes your link and sends back the video in original quality, ready to save or share.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supported Platforms -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Support for All Major Platforms
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Download videos from your favorite social media platforms with one simple bot.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="reveal">
+                    <div class="bg-white rounded-2xl p-8 text-center card-hover platform-icon">
+                        <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                            <span class="text-white text-3xl font-bold">TikTok</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">TikTok</h3>
+                        <p class="text-gray-600 mb-6">Download TikTok videos without watermarks in HD quality. Support for all video formats and music preservation.</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <div class="flex items-center justify-center space-x-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span>No watermarks</span>
+                            </div>
+                            <div class="flex items-center justify-center space-x-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span>HD quality</span>
+                            </div>
+                            <div class="flex items-center justify-center space-x-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span>Audio included</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <div class="bg-white rounded-2xl p-8 text-center card-hover platform-icon">
+                        <div class="w-20 h-20 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                            <span class="text-white text-3xl font-bold">IG</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Instagram</h3>
+                        <p class="text-gray-600 mb-6">Save Instagram Reels, posts, and stories. Download multiple videos at once and preserve original quality.</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <div class="flex items-center justify-center space-x-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span>Reels & posts</span>
+                            </div>
+                            <div class="flex items-center justify-center space-x-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span>Stories support</span>
+                            </div>
+                            <div class="flex items-center justify-center space-x-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span>Batch download</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <div class="bg-white rounded-2xl p-8 text-center card-hover platform-icon">
+                        <div class="w-20 h-20 bg-gradient-to-br from-red-600 to-red-700 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                            <span class="text-white text-3xl font-bold">YT</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">YouTube</h3>
+                        <p class="text-gray-600 mb-6">Download YouTube videos and Shorts in various qualities. Choose from multiple format options and audio extraction.</p>
+                        <div class="space-y-2 text-sm text-gray-500">
+                            <div class="flex items-center justify-center space-x-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span>Multiple qualities</span>
+                            </div>
+                            <div class="flex items-center justify-center space-x-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span>MP4 & MP3</span>
+                            </div>
+                            <div class="flex items-center justify-center space-x-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span>Shorts support</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Dashboard -->
+    <section id="stats" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Trusted by Thousands
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Real statistics from our bot's performance and user satisfaction.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-8 mb-16">
+                <div class="reveal text-center">
+                    <div class="bg-gradient-to-br from-teal-50 to-teal-100 rounded-2xl p-8">
+                        <div class="text-4xl font-bold text-teal-600 mb-2 stats-counter" data-target="1250000">0</div>
+                        <div class="text-gray-600">Videos Downloaded</div>
+                    </div>
+                </div>
+                <div class="reveal text-center">
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8">
+                        <div class="text-4xl font-bold text-blue-600 mb-2 stats-counter" data-target="52000">0</div>
+                        <div class="text-gray-600">Active Users</div>
+                    </div>
+                </div>
+                <div class="reveal text-center">
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8">
+                        <div class="text-4xl font-bold text-green-600 mb-2 stats-counter" data-target="98">0</div>
+                        <div class="text-gray-600">Success Rate %</div>
+                    </div>
+                </div>
+                <div class="reveal text-center">
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-8">
+                        <div class="text-4xl font-bold text-purple-600 mb-2 stats-counter" data-target="4">0</div>
+                        <div class="text-gray-600">Platforms</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="reveal">
+                <div class="bg-gray-50 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Platform Usage Distribution</h3>
+                    <div id="platform-chart" style="width: 100%; height: 400px;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Benefits -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Why Choose VideoSave Bot?
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Experience the fastest, most reliable video downloading experience available.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="reveal">
+                    <div class="bg-white rounded-2xl p-8 card-hover">
+                        <div class="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center mb-6">
+                            <span class="text-white text-xl">⚡</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Lightning Fast</h3>
+                        <p class="text-gray-600">Get your videos in seconds with our optimized servers and efficient processing pipeline.</p>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <div class="bg-white rounded-2xl p-8 card-hover">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-6">
+                            <span class="text-white text-xl">🎨</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">No Watermarks</h3>
+                        <p class="text-gray-600">Download clean videos without any watermarks or branding. Perfect for content creators.</p>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <div class="bg-white rounded-2xl p-8 card-hover">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-6">
+                            <span class="text-white text-xl">📱</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Works Everywhere</h3>
+                        <p class="text-gray-600">Use on any device with Telegram. No additional apps or software installation required.</p>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <div class="bg-white rounded-2xl p-8 card-hover">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-6">
+                            <span class="text-white text-xl">🔒</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Privacy First</h3>
+                        <p class="text-gray-600">Your downloads are private and secure. We don't store or share your video content.</p>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <div class="bg-white rounded-2xl p-8 card-hover">
+                        <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mb-6">
+                            <span class="text-white text-xl">🎯</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">High Quality</h3>
+                        <p class="text-gray-600">Get videos in their original quality with multiple resolution options to choose from.</p>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <div class="bg-white rounded-2xl p-8 card-hover">
+                        <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-6">
+                            <span class="text-white text-xl">🆓</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Free to Use</h3>
+                        <p class="text-gray-600">Start downloading instantly with our free tier. Upgrade to premium for unlimited access.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-gradient-to-br from-teal-600 to-teal-700">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="reveal">
+                <h2 class="text-4xl font-bold text-white mb-6">
+                    Ready to Start Downloading?
+                </h2>
+                <p class="text-xl text-teal-100 mb-8 max-w-2xl mx-auto">
+                    Join thousands of users who trust VideoSave Bot for their video downloading needs. It's free, fast, and works everywhere.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="bg-white text-teal-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-100 transition-all">
+                        🚀 Try VideoSave Bot Now
+                    </button>
+                    <button class="border-2 border-white text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-white hover:text-teal-600 transition-all">
+                        📖 Read Setup Guide
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-3 mb-4">
+                    <div class="w-8 h-8 bg-gradient-to-br from-teal-500 to-teal-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">📥</span>
+                    </div>
+                    <span class="font-bold text-xl">VideoSave Bot</span>
+                </div>
+                <p class="text-gray-400 mb-6">The fastest way to download videos from any platform</p>
+                <div class="text-sm text-gray-500">
+                    © 2025 VideoSave Bot. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

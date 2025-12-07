@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Guide - VideoSave Bot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a5f5f;
+            --secondary: #ff6b6b;
+            --accent: #4ecdc4;
+            --neutral: #2c3e50;
+            --bg: #fafafa;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+        }
+        
+        .step-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(250, 250, 250, 0.9);
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+        }
+        
+        .code-block {
+            background: #1f2937;
+            color: #f9fafb;
+            border-radius: 12px;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+        
+        .telegram-button {
+            background: linear-gradient(135deg, #0088cc, #0099dd);
+            transition: all 0.3s ease;
+        }
+        
+        .telegram-button:hover {
+            background: linear-gradient(135deg, #0099dd, #00aaff);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 136, 204, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 nav-blur border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-gradient-to-br from-teal-600 to-teal-700 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">📥</span>
+                    </div>
+                    <span class="font-bold text-xl text-gray-900">VideoSave Bot</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-teal-600 transition-colors">Home</a>
+                    <a href="features.html" class="text-gray-700 hover:text-teal-600 transition-colors">Features</a>
+                    <a href="#setup" class="text-teal-600 font-semibold">Setup Guide</a>
+                    <a href="index.html#stats" class="text-gray-700 hover:text-teal-600 transition-colors">Statistics</a>
+                </div>
+                <button class="bg-gradient-to-r from-teal-600 to-teal-700 text-white px-6 py-2 rounded-lg hover:from-teal-700 hover:to-teal-800 transition-all">
+                    Try Bot Now
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-20 pb-16 bg-gradient-to-br from-teal-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center reveal">
+                <h1 class="text-5xl font-bold text-gray-900 mb-6">
+                    Get Started in
+                    <span class="bg-gradient-to-r from-teal-600 to-teal-700 bg-clip-text text-transparent">3 Simple Steps</span>
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Setting up VideoSave Bot is incredibly easy. No installation, no configuration - just start chatting and downloading videos instantly.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Steps -->
+    <section id="setup" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Quick Start Guide
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Follow these simple steps to start downloading videos in under 2 minutes.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-8 mb-16">
+                <!-- Step 1 -->
+                <div class="reveal">
+                    <div class="step-card bg-white rounded-2xl p-8 border border-gray-100 text-center">
+                        <div class="step-number w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-white text-2xl font-bold">1</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Find the Bot</h3>
+                        <p class="text-gray-600 mb-6">Search for "@instasaverke" in Telegram or click the direct link below to open the bot.</p>
+                        <div class="space-y-3">
+                            <div class="code-block text-center">
+                                <span class="text-teal-400">@instasaverke</span>
+                            </div>
+                            <button class="telegram-button text-white px-6 py-3 rounded-lg font-semibold w-full">
+                                📱 Open in Telegram
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="reveal">
+                    <div class="step-card bg-white rounded-2xl p-8 border border-gray-100 text-center">
+                        <div class="step-number w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-white text-2xl font-bold">2</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Start the Bot</h3>
+                        <p class="text-gray-600 mb-6">Click the "Start" button or send /start to begin the conversation and see the welcome message.</p>
+                        <div class="space-y-3">
+                            <div class="code-block text-center">
+                                <span class="text-teal-400">/start</span>
+                            </div>
+                            <div class="bg-gray-100 rounded-lg p-3 text-sm text-gray-600">
+                                💡 Tip: The bot will send you a welcome message with instructions
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="reveal">
+                    <div class="step-card bg-white rounded-2xl p-8 border border-gray-100 text-center">
+                        <div class="step-number w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-white text-2xl font-bold">3</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Send Video Link</h3>
+                        <p class="text-gray-600 mb-6">Copy any video link from TikTok, Instagram, or YouTube and paste it in the chat.</p>
+                        <div class="space-y-3">
+                            <div class="code-block text-xs">
+                                <span class="text-teal-400">https://tiktok.com/@user/video/123...</span>
+                            </div>
+                            <div class="bg-gray-100 rounded-lg p-3 text-sm text-gray-600">
+                                🎉 That's it! The bot will download your video automatically
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Instructions -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Detailed Instructions
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Everything you need to know about using VideoSave Bot effectively.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Platform Instructions -->
+                <div class="reveal">
+                    <div class="bg-white rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Platform-Specific Instructions</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="border-l-4 border-red-500 pl-6">
+                                <h4 class="text-lg font-semibold text-gray-900 mb-2">TikTok</h4>
+                                <ol class="text-gray-600 space-y-1 text-sm">
+                                    <li>1. Open the TikTok app</li>
+                                    <li>2. Find the video you want to download</li>
+                                    <li>3. Tap the "Share" arrow</li>
+                                    <li>4. Select "Copy link"</li>
+                                    <li>5. Paste the link in the bot chat</li>
+                                </ol>
+                                <div class="mt-3 text-xs text-gray-500">
+                                    💡 Works with both public and private videos
+                                </div>
+                            </div>
+                            
+                            <div class="border-l-4 border-purple-500 pl-6">
+                                <h4 class="text-lg font-semibold text-gray-900 mb-2">Instagram</h4>
+                                <ol class="text-gray-600 space-y-1 text-sm">
+                                    <li>1. Open Instagram app or website</li>
+                                    <li>2. Find the Reel, post, or story</li>
+                                    <li>3. Tap the three dots menu</li>
+                                    <li>4. Select "Copy link"</li>
+                                    <li>5. Send the link to the bot</li>
+                                </ol>
+                                <div class="mt-3 text-xs text-gray-500">
+                                    💡 Stories must be downloaded before they expire
+                                </div>
+                            </div>
+                            
+                            <div class="border-l-4 border-red-600 pl-6">
+                                <h4 class="text-lg font-semibold text-gray-900 mb-2">YouTube</h4>
+                                <ol class="text-gray-600 space-y-1 text-sm">
+                                    <li>1. Open YouTube app or website</li>
+                                    <li>2. Find the video or Short</li>
+                                    <li>3. Tap "Share"</li>
+                                    <li>4. Select "Copy link"</li>
+                                    <li>5. Paste in bot conversation</li>
+                                </ol>
+                                <div class="mt-3 text-xs text-gray-500">
+                                    💡 Supports videos up to 10 minutes
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bot Commands -->
+                <div class="reveal">
+                    <div class="bg-white rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Available Commands</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <code class="text-teal-600 font-semibold">/start</code>
+                                    <span class="text-xs bg-teal-100 text-teal-600 px-2 py-1 rounded">Basic</span>
+                                </div>
+                                <p class="text-sm text-gray-600">Start the bot and see the welcome message with instructions</p>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <code class="text-teal-600 font-semibold">/help</code>
+                                    <span class="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded">Support</span>
+                                </div>
+                                <p class="text-sm text-gray-600">Get detailed help and troubleshooting information</p>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <code class="text-teal-600 font-semibold">/stats</code>
+                                    <span class="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded">Info</span>
+                                </div>
+                                <p class="text-sm text-gray-600">View your download statistics and usage history</p>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <code class="text-teal-600 font-semibold">/quality</code>
+                                    <span class="text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded">Settings</span>
+                                </div>
+                                <p class="text-sm text-gray-600">Set your preferred video quality (HD, SD, or audio only)</p>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <code class="text-teal-600 font-semibold">/about</code>
+                                    <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Info</span>
+                                </div>
+                                <p class="text-sm text-gray-600">Learn more about the bot and its capabilities</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-teal-50 rounded-lg">
+                            <h4 class="font-semibold text-teal-800 mb-2">💡 Pro Tip</h4>
+                            <p class="text-sm text-teal-700">You don't need to use any commands to download videos! Just paste the link directly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Troubleshooting -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Troubleshooting
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Common issues and solutions to help you get the most out of VideoSave Bot.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="reveal">
+                    <div class="bg-red-50 border border-red-200 rounded-2xl p-6">
+                        <h3 class="text-xl font-bold text-red-800 mb-4 flex items-center">
+                            <span class="mr-2">❌</span>
+                            Download Failed
+                        </h3>
+                        <div class="space-y-3 text-sm">
+                            <div>
+                                <strong class="text-red-700">Possible causes:</strong>
+                                <ul class="mt-1 text-red-600 space-y-1 ml-4">
+                                    <li>• Video is private or deleted</li>
+                                    <li>• Link is incorrect or incomplete</li>
+                                    <li>• Platform is temporarily unavailable</li>
+                                    <li>• Video exceeds size limits</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong class="text-red-700">Solutions:</strong>
+                                <ul class="mt-1 text-red-600 space-y-1 ml-4">
+                                    <li>• Check if the video is public</li>
+                                    <li>• Copy the link again carefully</li>
+                                    <li>• Try again in a few minutes</li>
+                                    <li>• Use /help command for support</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <div class="bg-orange-50 border border-orange-200 rounded-2xl p-6">
+                        <h3 class="text-xl font-bold text-orange-800 mb-4 flex items-center">
+                            <span class="mr-2">⏳</span>
+                            Slow Download Speed
+                        </h3>
+                        <div class="space-y-3 text-sm">
+                            <div>
+                                <strong class="text-orange-700">Possible causes:</strong>
+                                <ul class="mt-1 text-orange-600 space-y-1 ml-4">
+                                    <li>• High server load</li>
+                                    <li>• Large video file size</li>
+                                    <li>• Slow internet connection</li>
+                                    <li>• Platform rate limiting</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong class="text-orange-700">Solutions:</strong>
+                                <ul class="mt-1 text-orange-600 space-y-1 ml-4">
+                                    <li>• Wait a moment and try again</li>
+                                    <li>• Choose lower quality option</li>
+                                    <li>• Check your internet connection</li>
+                                    <li>• Try downloading during off-peak hours</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+                        <h3 class="text-xl font-bold text-blue-800 mb-4 flex items-center">
+                            <span class="mr-2">🔒</span>
+                            Private/Restricted Content
+                        </h3>
+                        <div class="space-y-3 text-sm">
+                            <div>
+                                <strong class="text-blue-700">Issue:</strong>
+                                <p class="mt-1 text-blue-600">Some private or age-restricted content cannot be downloaded due to platform policies.</p>
+                            </div>
+                            <div>
+                                <strong class="text-blue-700">Workaround:</strong>
+                                <ul class="mt-1 text-blue-600 space-y-1 ml-4">
+                                    <li>• Ensure you're following the account</li>
+                                    <li>• Check if the content is public</li>
+                                    <li>• Try alternative links if available</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <div class="bg-green-50 border border-green-200 rounded-2xl p-6">
+                        <h3 class="text-xl font-bold text-green-800 mb-4 flex items-center">
+                            <span class="mr-2">📱</span>
+                            Mobile App Issues
+                        </h3>
+                        <div class="space-y-3 text-sm">
+                            <div>
+                                <strong class="text-green-700">Common problems:</strong>
+                                <ul class="mt-1 text-green-600 space-y-1 ml-4">
+                                    <li>• Can't copy links properly</li>
+                                    <li>• Bot not responding</li>
+                                    <li>• Downloaded video not saving</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong class="text-green-700">Solutions:</strong>
+                                <ul class="mt-1 text-green-600 space-y-1 ml-4">
+                                    <li>• Update Telegram to latest version</li>
+                                    <li>• Restart the Telegram app</li>
+                                    <li>• Check storage permissions</li>
+                                    <li>• Try using Telegram Web</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tips and Tricks -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Tips & Tricks
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Advanced techniques to get the most out of VideoSave Bot.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="reveal">
+                    <div class="bg-white rounded-2xl p-8 step-card">
+                        <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center mb-6">
+                            <span class="text-white text-xl">⚡</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Speed Up Downloads</h3>
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li>• Download during off-peak hours</li>
+                            <li>• Choose SD quality for faster processing</li>
+                            <li>• Use Wi-Fi instead of mobile data</li>
+                            <li>• Send multiple links in separate messages</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <div class="bg-white rounded-2xl p-8 step-card">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mb-6">
+                            <span class="text-white text-xl">🎨</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Better Quality</h3>
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li>• Use /quality command to set preferences</li>
+                            <li>• Download original videos when possible</li>
+                            <li>• Check video settings before downloading</li>
+                            <li>• Use HD option for important content</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <div class="bg-white rounded-2xl p-8 step-card">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-500 rounded-xl flex items-center justify-center mb-6">
+                            <span class="text-white text-xl">🔧</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Power User Features</h3>
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li>• Use /stats to track your usage</li>
+                            <li>• Extract audio with MP3 option</li>
+                            <li>• Create playlists from downloaded content</li>
+                            <li>• Share downloaded videos with friends</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-gradient-to-br from-teal-600 to-teal-700">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="reveal">
+                <h2 class="text-4xl font-bold text-white mb-6">
+                    Ready to Start?
+                </h2>
+                <p class="text-xl text-teal-100 mb-8 max-w-2xl mx-auto">
+                    You're all set! Start downloading videos now with VideoSave Bot. It's free, fast, and incredibly easy to use.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="telegram-button text-white px-8 py-4 rounded-xl text-lg font-semibold">
+                        🚀 Start Downloading Now
+                    </button>
+                    <button class="border-2 border-white text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-white hover:text-teal-600 transition-all">
+                        📖 Back to Features
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-3 mb-4">
+                    <div class="w-8 h-8 bg-gradient-to-br from-teal-500 to-teal-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">📥</span>
+                    </div>
+                    <span class="font-bold text-xl">VideoSave Bot</span>
+                </div>
+                <p class="text-gray-400 mb-6">The fastest way to download videos from any platform</p>
+                <div class="text-sm text-gray-500">
+                    © 2025 VideoSave Bot. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize scroll reveal
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Add click handlers
+        document.addEventListener('click', function(e) {
+            if (e.target.textContent.includes('Try Bot Now') || 
+                e.target.textContent.includes('Start Downloading') ||
+                e.target.textContent.includes('Open in Telegram')) {
+                window.open('https://t.me/instasaverke', '_blank');
+            }
+            
+            if (e.target.textContent.includes('Back to Features')) {
+                window.location.href = 'features.html';
+            }
+        });
+    </script>
+</body>
+</html>
