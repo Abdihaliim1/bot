@@ -1,6 +1,7 @@
 require('dotenv').config();
 const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
+const http = require('http');
 // const ytdl = require('ytdl-core'); // Removed as it is deprecated/broken
 const fs = require('fs');
 const path = require('path');
@@ -26,7 +27,6 @@ const bot = new TelegramBot(token, {
       timeout: 10
     }
   }
-}
 });
 
 // Set bot commands (Menu)
@@ -515,5 +515,16 @@ bot.getMe().then((botInfo) => {
   console.error('❌ Failed to connect to Telegram API:', error);
   console.error('Please check your BOT_TOKEN in .env file');
   process.exit(1);
+});
+
+// Create a dummy HTTP server for Render (Web Service requirement)
+const port = process.env.PORT || 8080;
+const server = http.createServer((req, res) => {
+  res.writeHead(200);
+  res.end('Bot is running!');
+});
+
+server.listen(port, () => {
+  console.log(`✅ Server is listening on port ${port}`);
 });
 
