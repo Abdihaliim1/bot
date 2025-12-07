@@ -9,7 +9,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install yt-dlp via pip to get the latest version
-RUN python3 -m pip install -U yt-dlp
+# Using --break-system-packages because we are in a container and want to install globally
+RUN python3 -m pip install -U yt-dlp --break-system-packages
 
 # Create app directory
 WORKDIR /usr/src/app
