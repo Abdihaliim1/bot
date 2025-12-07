@@ -26,6 +26,18 @@ const bot = new TelegramBot(token, {
       timeout: 10
     }
   }
+}
+});
+
+// Set bot commands (Menu)
+bot.setMyCommands([
+  { command: '/start', description: 'Start the bot and see welcome message' },
+  { command: '/help', description: 'Get help on how to use the bot' },
+  { command: '/supported', description: 'See supported sites (YouTube, Tikok, etc)' }
+]).then(() => {
+  console.log('✅ Bot commands menu set successfully');
+}).catch((error) => {
+  console.error('❌ Failed to set bot commands:', error.message);
 });
 
 // Create downloads directory if it doesn't exist
