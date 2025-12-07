@@ -56,10 +56,24 @@ function cleanupFile(filePath) {
   setTimeout(() => {
     if (fs.existsSync(filePath)) {
       fs.unlink(filePath, (err) => {
-        if (err) console.error(`Error deleting file: ${err}`);
       });
     }
   }, 60000); // Delete after 1 minute
+}
+
+// Channel to force subscribe
+const REQUIRED_CHANNEL = '@fnyke';
+
+// Check if user is subscribed
+async function checkSubscription(userId) {
+  try {
+    const chatMember = await bot.getChatMember(REQUIRED_CHANNEL, userId);
+    return ['creator', 'administrator', 'member'].includes(chatMember.status);
+  } catch (error) {
+    console.error('Error checking subscription:', error.message);
+    // Return false on error (e.g. bot not admin) to enforce checking
+    return false;
+  }
 }
 
 // Download YouTube video - using yt-dlp with timeout
@@ -340,6 +354,20 @@ Just send me a video link from any supported platform!
   bot.sendMessage(chatId, welcomeMessage, { parse_mode: 'Markdown' })
     .then(() => console.log(`✅ Sent welcome message to chat ${chatId}`))
     .catch(err => console.error(`❌ Error sending message:`, err));
+
+  // Also prompt to join channel on start
+  checkSubscription(msg.from.id).then(isSubscribed => {
+    if (!isSubscribed) {
+      bot.sendMessage(chatId, `⚠️ *Please Note:*\n\nYou need to join ${REQUIRED_CHANNEL} to download videos.`, {
+        parse_mode: 'Markdown',
+        reply_markup: {
+          inline_keyboard: [[
+            { text: "📢 Join Channel", url: `https://t.me/${REQUIRED_CHANNEL.replace('@', '')}` }
+          ]]
+        }
+      });
+    }
+  });
 });
 
 bot.onText(/\/help/, (msg) => {
@@ -408,6 +436,21 @@ bot.on('message', async (msg) => {
   const urls = text ? text.match(urlRegex) : null;
 
   if (urls && urls.length > 0) {
+
+    // Check subscription before downloading
+    const isSubscribed = await checkSubscription(msg.from.id);
+    if (!isSubscribed) {
+      await bot.sendMessage(chatId, `❌ *Access Denied*\n\nYou must subscribe to our channel to use this bot.\n\n👉 Join here: ${REQUIRED_CHANNEL}`, {
+        parse_mode: 'Markdown',
+        reply_markup: {
+          inline_keyboard: [[
+            { text: "📢 Join Channel", url: `https://t.me/${REQUIRED_CHANNEL.replace('@', '')}` }
+          ]]
+        }
+      });
+      return;
+    }
+
     const url = urls[0];
     console.log(`🔗 Detected URL: ${url}`);
     await handleDownload(url, chatId, msg.message_id);
